@@ -1,0 +1,156 @@
+/* ============================================================
+   Akash Banger — personal design system · tokens v0.1
+   Single source of truth for all design decisions.
+
+   Locked (prototype rounds 1–4, Aug 2026):
+   · Direction: public-roadmap builder dashboard, honest data
+   · Themes:    dark (default) + light
+   · Type:      Bricolage Grotesque / Inter / JetBrains Mono
+   · Color:     "Ember & Violet" role system
+   · Shape:     Round (24px cards, pill buttons)
+   · Space:     Airy
+   · Motion:    Lively (spring hovers, reveals)
+   ============================================================ */
+
+/* ---- self-hosted fonts (latin subsets, variable) ---- */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/fonts/bricolage-grotesque-latin.woff2") format("woff2");
+  font-weight: 500 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-display: swap;
+}
+
+:root {
+  /* ---------------- typography ---------------- */
+  --font-display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-meta: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-xs: 11px;        /* badges, NEW tags */
+  --text-sm: 12.5px;      /* meta lines, dates */
+  --text-body-sm: 14.5px; /* card body, descriptions */
+  --text-body: 16px;      /* base body */
+  --text-lg: 19px;        /* hero hello line */
+  --text-h3: 17px;        /* card titles */
+  --text-h2: 22px;        /* section headings */
+  --text-hero: clamp(25px, 3.4vw, 38px);   /* home statement */
+  --text-page: clamp(30px, 4.5vw, 46px);   /* article / page titles */
+
+  --weight-display: 650;
+  --track-display: -0.015em;
+  --leading-body: 1.6;
+  --leading-display: 1.22;
+
+  /* ---------------- shape (Round) ---------------- */
+  --r-card: 24px;
+  --r-field: 16px;
+  --r-btn: 999px;
+  --r-badge: 999px;
+  --r-bar: 99px;
+
+  /* ---------------- space (Airy) ---------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 18px;
+  --space-5: 26px;
+  --space-6: 40px;
+  --space-7: 64px;
+  --space-8: 104px;
+  --sp-card: 26px;      /* card padding */
+  --sp-row: 19px;       /* list row vertical padding */
+  --sp-section: 104px;  /* gap between page sections */
+  --sp-hero: 76px;      /* top padding above hero */
+  --sp-h2: 28px;        /* heading to content gap */
+  --measure: 66ch;      /* max line length for prose */
+
+  /* ---------------- motion (Lively, Emil-tuned) ---------------- */
+  --ease-out: cubic-bezier(.23, 1, .32, 1);       /* strong ease-out — all UI transitions */
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1); /* reserved for playful moments — never hovers */
+  --dur-fast: .15s;
+  --dur-med: .18s;
+  --dur-press: .12s;
+  --dur-reveal: .4s;
+  --stagger: 50ms;      /* delay step for cascading reveals */
+  --lift: -2px;         /* clickable-card hover translateY */
+
+  /* ---------------- color · dark (default) ---------------- */
+  --bg: #0b0b0d;
+  --surface: #141417;
+  --surface-2: #1a1a1f;
+  --chip-bg: #1c1c21;
+  --border: #26262c;
+  --rule: #303038;
+
+  --fg: #f0f0ee;
+  --muted: #97979f;
+  --faint: #63636b;
+
+  --primary: #e2955c;
+  --on-primary: #1c0f04;
+  --secondary: #a78bfa;
+
+  --success: #7fbf8e;
+  --warning: #e0b25c;
+  --danger: #e57373;
+  --info: #7db4e8;
+
+  --shadow: none;
+  /* layered hover shadow: tight contact + soft ambient */
+  --hover-shadow: 0 2px 6px rgba(0, 0, 0, .35), 0 14px 30px rgba(0, 0, 0, .26);
+  /* hover speaks through surface tone: light wash up in dark theme */
+  --hover-tint: linear-gradient(rgba(255, 255, 255, .035), rgba(255, 255, 255, 0));
+  /* hovered card border: one step up, barely-there */
+  --hover-border: #303038;
+
+  /* soft washes derive from the roles above */
+  --primary-soft: color-mix(in srgb, var(--primary) 15%, transparent);
+  --secondary-soft: color-mix(in srgb, var(--secondary) 14%, transparent);
+  --success-soft: color-mix(in srgb, var(--success) 14%, transparent);
+  --warning-soft: color-mix(in srgb, var(--warning) 15%, transparent);
+  --danger-soft: color-mix(in srgb, var(--danger) 14%, transparent);
+  --info-soft: color-mix(in srgb, var(--info) 14%, transparent);
+}
+
+/* ---------------- color · light ---------------- */
+:root[data-theme="light"] {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --surface-2: #f3f3ef;
+  --chip-bg: #efefe9;
+  --border: #e7e7e1;
+  --rule: #d8d8d2;
+
+  --fg: #191a1c;
+  --muted: #6e6e76;
+  --faint: #a3a3aa;
+
+  --primary: #c9702f;
+  --on-primary: #ffffff;
+  --secondary: #6d4fd2;
+
+  --success: #2e7d4f;
+  --warning: #a8741a;
+  --danger: #c43d3d;
+  --info: #2f6bdf;
+
+  --shadow: 0 1px 3px rgba(20, 20, 25, .06), 0 8px 24px rgba(20, 20, 25, .05);
+  /* light hover mirrors dark's character: whisper shadow, visible tone shift, quiet border */
+  --hover-shadow: 0 2px 6px rgba(25, 26, 28, .04), 0 8px 16px rgba(25, 26, 28, .04);
+  /* white can't lighten, so light theme washes DOWN — same channel as dark, opposite direction */
+  --hover-tint: linear-gradient(rgba(25, 26, 28, .034), rgba(25, 26, 28, .02));
+  /* border stays put in light — no outline pop */
+  --hover-border: #e7e7e1;
+}

@@ -1,0 +1,269 @@
+---
+import '../styles/tokens.css';
+import '../styles/system.css';
+
+const description =
+  'Akash Banger builds with AI coding agents daily: apps, pipelines, and Claude Code and Codex workflows that make developers faster. Now starting to build in the open.';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Akash Banger</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content="Akash Banger" />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@akash__banger" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const system = matchMedia('(prefers-color-scheme: light)');
+        const apply = (t) => document.documentElement.setAttribute('data-theme', t);
+        apply(stored ?? (system.matches ? 'light' : 'dark'));
+        system.addEventListener('change', (e) => {
+          if (!localStorage.getItem('theme')) apply(e.matches ? 'light' : 'dark');
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="topbar">
+      <a class="who" href="/">Akash Banger</a>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"></path>
+        </svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="wrap">
+      <div class="hero">
+        <div class="hero-cluster">
+          <div class="pw p1"><img class="hero-photo" src="/images/portrait.jpg" alt="Akash Banger" width="150" height="150" /></div>
+          <div class="pw p2"><img class="hero-photo" src="/images/travel.jpg" alt="Akash on a solo trip in Europe" width="130" height="170" /></div>
+          <div class="pw p3"><img class="hero-photo" src="/images/desk.jpg" alt="Akash at his desk, building" width="180" height="130" /></div>
+        </div>
+        <div>
+          <div class="hello">Hey, I'm <b>Akash</b>.</div>
+          <div class="statement">
+            Obsessed with what one builder can ship in the AI era<span class="dim">.</span> Now
+            <u>starting to build in the open</u><span class="dim">,</span>
+            <span class="acc">learnings included</span><span class="dim">.</span>
+          </div>
+          <p class="bio">
+            IIT Bombay, a year as founding engineer at a YC-backed startup, and a stack of
+            internships before that. These days I build with coding agents daily: apps, pipelines,
+            Claude Code and Codex workflows, plugins that make developers faster. This site is where
+            that starts going public, both what I'm building and what actually works.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <a class="meta" href="mailto:akashbanger2@gmail.com">akashbanger2@gmail.com</a>
+      <span class="meta">
+        <a href="https://x.com/akash__banger" target="_blank" rel="me noopener">X</a> &middot;
+        <a href="https://www.linkedin.com/in/akash-banger/" target="_blank" rel="me noopener">LinkedIn</a> &middot;
+        <a href="https://www.instagram.com/akash.banger/" target="_blank" rel="me noopener">Instagram</a>
+      </span>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('theme-toggle')!;
+      btn.addEventListener('click', () => {
+        const next =
+          document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  a {
+    color: inherit;
+  }
+  a:not([class]):hover {
+    color: var(--primary);
+  }
+
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--bg);
+    transition: background var(--dur-med) ease;
+  }
+  .topbar .who {
+    text-decoration: none;
+  }
+  .theme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--r-btn);
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color var(--dur-fast) ease, background var(--dur-fast) ease;
+  }
+  .theme-btn:hover {
+    background: var(--chip-bg);
+    color: var(--fg);
+  }
+  html[data-theme='light'] .icon-sun {
+    display: none;
+  }
+  html:not([data-theme='light']) .icon-moon {
+    display: none;
+  }
+
+  .wrap {
+    max-width: none;
+    width: 80%;
+    padding-left: 0;
+    padding-right: 0;
+    flex: 1;
+  }
+
+  .hero {
+    margin-bottom: var(--sp-section);
+  }
+  .hero-cluster {
+    position: relative;
+    width: 420px;
+    max-width: 100%;
+    height: 220px;
+    margin-bottom: var(--space-5);
+  }
+  .bio {
+    color: var(--muted);
+    font-size: var(--text-body-sm);
+    max-width: var(--measure);
+  }
+
+  .pw {
+    position: absolute;
+    opacity: 0;
+    animation:
+      photo-in var(--dur-reveal) var(--ease-out) both,
+      photo-float 6s ease-in-out infinite;
+  }
+  @keyframes photo-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes photo-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--r-card);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    display: block;
+    transform: rotate(var(--tilt));
+    transition:
+      transform 0.32s var(--ease-out),
+      box-shadow 0.32s var(--ease-out);
+  }
+  .pw.p1 {
+    --tilt: 3deg;
+    width: 150px;
+    height: 150px;
+    left: 110px;
+    top: 8px;
+    z-index: 3;
+    animation-delay: 0s, 0.5s;
+  }
+  .pw.p2 {
+    --tilt: -6deg;
+    width: 130px;
+    height: 170px;
+    left: 0;
+    top: 24px;
+    z-index: 2;
+    animation-delay: var(--stagger), 1.6s;
+    animation-duration: var(--dur-reveal), 7s;
+  }
+  .pw.p3 {
+    --tilt: 5deg;
+    width: 180px;
+    height: 130px;
+    left: 235px;
+    top: 40px;
+    z-index: 1;
+    animation-delay: calc(var(--stagger) * 2), 2.7s;
+    animation-duration: var(--dur-reveal), 6.5s;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .hero-cluster:has(.hero-photo:hover) .pw {
+      animation-play-state: paused, paused;
+    }
+    .pw:hover {
+      z-index: 4;
+    }
+    .pw:hover .hero-photo {
+      transform: rotate(0deg) scale(1.12);
+      box-shadow: var(--hover-shadow);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pw {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
+  footer {
+    width: 80%;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+    padding: 20px 0 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  footer a {
+    text-decoration: none;
+  }
+  footer a:hover {
+    color: var(--primary);
+  }
+</style>
