@@ -8,10 +8,10 @@ See README.md. There are no tests or linters; verification for a change is a loc
 
 ## Deploy workflow (non-negotiable)
 
+- Iterate locally first: verify every change on this machine (local build; for visual work, a screenshot or dev-server review Akash approves) before pushing anything. The Vercel preview confirms an already-approved change; it is not the iteration loop.
 - Every change rides a feature branch and a PR. `main` is protected by a GitHub ruleset with no bypass actors; no token can push it directly.
 - Vercel builds each PR into a preview deployment and its `Vercel` check must pass. Production ships only by merging to `main`; deploy by merge, never by CLI.
 - Only Akash merges: in the GitHub UI, or by saying so explicitly, after which `gh pr merge` is fine. Squash merges only; branches auto-delete.
-- For visual changes, show Akash a local screenshot before pushing.
 
 ## Architecture
 
