@@ -13,3 +13,8 @@ node_modules/
 # os
 .DS_Store
 .vercel
+
+# agent instruction files
+CLAUDE.local.md
+.claude/settings.local.json
+AGENTS.override.md
