@@ -16,3 +16,7 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## License
+
+Code is MIT. Photos, images, and written content are all rights reserved; see [LICENSE](LICENSE).
