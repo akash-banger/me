@@ -36,11 +36,11 @@ const description =
     <div class="topbar">
       <a class="who" href="/">Akash Banger</a>
       <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
-        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <svg class="icon-sun" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <circle cx="12" cy="12" r="4"></circle>
           <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"></path>
         </svg>
-        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="icon-moon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
         </svg>
       </button>
@@ -149,6 +149,7 @@ const description =
     text-decoration: none;
   }
   .theme-btn {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -159,17 +160,35 @@ const description =
     background: transparent;
     color: var(--muted);
     cursor: pointer;
-    transition: color var(--dur-fast) ease, background var(--dur-fast) ease;
+    transition:
+      color var(--dur-fast) ease,
+      background var(--dur-fast) ease,
+      transform var(--dur-fast) var(--ease-out);
   }
   .theme-btn:hover {
     background: var(--chip-bg);
     color: var(--fg);
   }
-  html[data-theme='light'] .icon-sun {
-    display: none;
+  .theme-btn:active {
+    transform: scale(0.94);
+    transition-duration: var(--dur-press);
   }
+  .theme-btn svg {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s var(--ease-out),
+      filter 0.25s ease;
+  }
+  html[data-theme='light'] .icon-sun,
   html:not([data-theme='light']) .icon-moon {
-    display: none;
+    opacity: 0;
+    transform: scale(0.9);
+    filter: blur(4px);
   }
 
   .wrap {
@@ -203,6 +222,50 @@ const description =
     color: var(--muted);
     font-size: var(--text-body-sm);
     max-width: 80%;
+  }
+
+  /* page entrance: topbar drops, hero text drifts up after the photos,
+     footer fades last */
+  @keyframes drop-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes drift-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .topbar {
+    animation: drop-in 0.5s var(--ease-out) both;
+  }
+  .hello,
+  .statement,
+  .bio {
+    animation: drift-in 0.6s var(--ease-out) both;
+  }
+  .hello { animation-delay: 0.35s; }
+  .statement { animation-delay: 0.5s; }
+  .bio { animation-delay: 0.65s; }
+  footer {
+    animation: fade-in 0.6s ease both;
+    animation-delay: 0.9s;
   }
 
   .pw {
@@ -304,6 +367,7 @@ const description =
   }
   footer a {
     text-decoration: none;
+    transition: color var(--dur-fast) ease;
   }
   footer a:hover {
     color: var(--primary);
